@@ -28,6 +28,7 @@ public class EnemyMovement : MonoBehaviour
 
         // Calculate the journey length.
         journeyLength = Vector3.Distance(startMarker, endMarker);
+        transform.position = startMarker;
 
     }
 
