@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class SceneSwitcher : MonoBehaviour
@@ -13,7 +14,7 @@ public class SceneSwitcher : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playButton.onClick.AddListener(()=>ChangeScene());
+        playButton.onClick.AddListener(()=>GotoGameScene());
     }
 
     // Update is called once per frame
@@ -25,5 +26,15 @@ public class SceneSwitcher : MonoBehaviour
     void ChangeScene()
     {
         Debug.Log("hello");
+    }
+
+    public void GotoGameScene()
+    {
+        SceneManager.LoadScene("Game");
+    }
+
+    public void GotoMenuScene()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }
