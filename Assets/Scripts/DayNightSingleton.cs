@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement; //Allows us to use SceneManager
 
-public class DayNight : MonoBehaviour
+public class DayNightSingleton : MonoBehaviour
 {
     // Singleton instance
-    private static DayNight _instance;
+    private static DayNightSingleton _instance;
 
-    private int numDays;
-    private bool isDay;
+    private int numDays = 0;
+    private bool isDay = true;
 
-    public static DayNight Instance { get { return _instance; } }
+    public static DayNightSingleton Instance { get { return _instance; } }
 
     private void Awake()
         {
@@ -28,5 +28,16 @@ public class DayNight : MonoBehaviour
 
     public int getNumDays { get { return numDays; } }
 
-    public bool getIsDay { get { return isDay; } }    
+    public bool getIsDay { get { return isDay; } }
+
+    void ToTransition()
+    {
+        isDay = !isDay;
+        if (isDay)
+        {
+            numDays++;
+        }
+
+        SceneManager.LoadScene("TransitonScreen");
+    }
 }
