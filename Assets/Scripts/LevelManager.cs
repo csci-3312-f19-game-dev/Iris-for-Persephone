@@ -15,6 +15,8 @@ public class LevelManager : Singleton<LevelManager>
     private GameObject vortexSpawnPrefab;
     [SerializeField]
     private GameObject phantomSpawnPrefab;
+    [SerializeField]
+    private Transform map;
 
 
     public Dictionary<Point, TileScript> Tiles { get; set; }
@@ -61,7 +63,8 @@ public class LevelManager : Singleton<LevelManager>
     {
         TileScript newTile = Instantiate(tilePrefabs[0]).GetComponent<TileScript>();
         newTile.GetComponent<TileScript>().Setup(new Point(x, y), 
-                                                 new Vector3(topLeft.x + TileSize * x + TileSize / 2, topLeft.y - TileSize * y - TileSize / 2, 0.0f));
+                                                 new Vector3(topLeft.x + TileSize * x + TileSize / 2, topLeft.y - TileSize * y - TileSize / 2, 0.0f),
+                                                 map);
     }
 
     private void PlaceSpawner()
