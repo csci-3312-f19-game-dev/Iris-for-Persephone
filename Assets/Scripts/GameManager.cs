@@ -9,6 +9,8 @@ public class GameManager : Singleton<GameManager>
 
     private int seeds;
 
+    private int enemyDiffuculty = 1;
+
     private bool isNight = false;
 
     [SerializeField]
@@ -91,9 +93,14 @@ public class GameManager : Singleton<GameManager>
 
     public void TransitionToNight()
     {
+        if (IsNight) return;
         IsNight = true;
         LevelManager.Instance.DarkenLevel();
-        StartCoroutine(SpawnEnemies());
+        for (int i = 0; i < enemyDiffuculty; i++)
+        {
+            StartCoroutine(SpawnEnemies());
+        }
+        enemyDiffuculty += 1;
     }
 
     public void TransitionToDay()
