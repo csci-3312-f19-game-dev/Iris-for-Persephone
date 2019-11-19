@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyMovement : MonoBehaviour
 {
@@ -26,7 +27,10 @@ public class EnemyMovement : MonoBehaviour
         if(Time.time - startTime > 1 / speed)
         {
             Point goal = LevelManager.Instance.IrisLocation;
-            if (goal.X == loc.X && goal.Y == loc.Y) Debug.Log("GAME OVER");
+            if (goal.X == loc.X && goal.Y == loc.Y)
+            {
+                SceneManager.LoadScene(2);
+            }
             else
             {
                 Point oldLoc = loc;
@@ -71,7 +75,7 @@ public class EnemyMovement : MonoBehaviour
                 {
                     applyLocation();
                 }
-                
+
             }
 
             startTime = Time.time;
