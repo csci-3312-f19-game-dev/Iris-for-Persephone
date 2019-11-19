@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public float speed = 1.0f;
+    static public float speed = 1.0f;
 
     // Time when the movement started.
     private float startTime;
@@ -13,6 +13,7 @@ public class EnemyMovement : MonoBehaviour
     // Start is called before the first frame update
     public void Setup(Point start)
     {
+        speed += 0.1f;
         GameManager.Instance.NumberOfEnemies += 1;
         loc = start;
         applyLocation();
@@ -77,6 +78,7 @@ public class EnemyMovement : MonoBehaviour
 
     void OnMouseDown()
     {
+        GameManager.Instance.Seeds += 3;
         // this object was clicked - do something
         GameManager.Instance.NumberOfEnemies -= 1;
         Destroy(this.gameObject);
