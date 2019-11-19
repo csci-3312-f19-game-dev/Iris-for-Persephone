@@ -63,7 +63,7 @@ public class EnemyMovement : MonoBehaviour
                     {
                         GameObject.Destroy(child.gameObject);
                     }
-                    
+                    LevelManager.Instance.Tiles[loc].IsEmpty = true;
                     Destroy(this.gameObject);
                     loc = oldLoc;
                 }

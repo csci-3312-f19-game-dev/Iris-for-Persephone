@@ -7,7 +7,7 @@ public class TileScript : MonoBehaviour
 {
     public Point GridPosition { get; private set; }
 
-    public bool IsEmpty { get; private set; }
+    public bool IsEmpty { get; set; }
 
     private Color32 failColor = new Color32(255, 150, 150, 255);
     private Color32 successColor = new Color32(120, 255, 100, 255);
