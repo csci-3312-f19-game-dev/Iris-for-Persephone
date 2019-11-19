@@ -58,6 +58,13 @@ public class EnemyMovement : MonoBehaviour
                 }
                 if (!LevelManager.Instance.Tiles[loc].IsEmpty)
                 {
+                    GameManager.Instance.NumberOfEnemies -= 1;
+                    foreach (Transform child in LevelManager.Instance.Tiles[loc].transform)
+                    {
+                        GameObject.Destroy(child.gameObject);
+                    }
+                    
+                    Destroy(this.gameObject);
                     loc = oldLoc;
                 }
                 else
