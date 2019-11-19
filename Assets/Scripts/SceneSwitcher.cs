@@ -30,7 +30,7 @@ public class SceneSwitcher : MonoBehaviour
 
     public void GotoGameScene()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("TransitionScene");
     }
 
     public void GotoMenuScene()

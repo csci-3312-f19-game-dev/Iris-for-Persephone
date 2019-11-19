@@ -14,8 +14,20 @@ public class TransitionDaySet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SetText();
+    }
 
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    void SetText()
+    {
         num = DayNightSingleton.Instance.getNumDays;
+        //Debug.Log("SetText() ran.");
+        //Debug.Log("num = " + num);
 
         if (DayNightSingleton.Instance.getIsDay)
         {
@@ -24,12 +36,5 @@ public class TransitionDaySet : MonoBehaviour
         {
             text.text = ("Night " + num);
         }
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }
