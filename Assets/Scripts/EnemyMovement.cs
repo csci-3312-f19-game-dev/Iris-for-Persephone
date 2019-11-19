@@ -8,46 +8,77 @@ public class EnemyMovement : MonoBehaviour
 
     // Time when the movement started.
     private float startTime;
-
-    public float radius = 10.0f;
-
-    // Transforms to act as start and end markers for the journey.
-    private Vector3 startMarker;
-    private Vector3 endMarker = new Vector3(0.0f, 0.0f, 0.0f);
-
-    // Total distance between the markers.
-    private float journeyLength;
+    private Point loc;
 
     // Start is called before the first frame update
-    void Start()
+    public void Setup(Point start)
     {
-        float randomAngle = Random.Range(0, 2 * Mathf.PI);
-        startMarker = new Vector3(radius * Mathf.Cos(randomAngle), radius * Mathf.Sin(randomAngle), 0.0f);
-        // Keep a note of the time the movement started.
+        GameManager.Instance.NumberOfEnemies += 1;
+        loc = start;
+        applyLocation();
         startTime = Time.time;
-
-        // Calculate the journey length.
-        journeyLength = Vector3.Distance(startMarker, endMarker);
-        transform.position = startMarker;
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Distance moved equals elapsed time times speed..
-        float distCovered = (Time.time - startTime) * speed;
+        if(Time.time - startTime > 1 / speed)
+        {
+            Point goal = LevelManager.Instance.IrisLocation;
+            if (goal.X == loc.X && goal.Y == loc.Y) Debug.Log("GAME OVER");
+            else
+            {
+                Point oldLoc = loc;
+                int xDiff = goal.X - loc.X;
+                int yDiff = goal.Y - loc.Y;
+                int xDir = xDiff > 0 ? 1 : -1;
+                int yDir = yDiff > 0 ? 1 : -1;
 
-        // Fraction of journey completed equals current distance divided by total distance.
-        float fractionOfJourney = distCovered / journeyLength;
+                if (xDiff == 0 && yDiff != 0)
+                {
+                    loc.Y += yDir;
+                }
+                else if (xDiff != 0 && yDiff == 0)
+                {
+                    loc.X += xDir;
+                }
+                else
+                {
+                    int xy = Random.Range(0, 2);
+                    switch (xy)
+                    {
+                        case 0:
+                            loc.X += xDir;
+                            break;
+                        case 1:
+                            loc.Y += yDir;
+                            break;
+                    }
+                }
+                if (!LevelManager.Instance.Tiles[loc].IsEmpty)
+                {
+                    loc = oldLoc;
+                }
+                else
+                {
+                    applyLocation();
+                }
+                
+            }
 
-        // Set our position as a fraction of the distance between the markers.
-        transform.position = Vector3.Lerp(startMarker, endMarker, fractionOfJourney);
+            startTime = Time.time;
+        }
+    }
+
+    private void applyLocation()
+    {
+        transform.position = LevelManager.Instance.pointToWorldSpace(loc);
     }
 
     void OnMouseDown()
     {
         // this object was clicked - do something
+        GameManager.Instance.NumberOfEnemies -= 1;
         Destroy(this.gameObject);
     }
 }

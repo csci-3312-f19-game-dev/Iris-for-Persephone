@@ -34,6 +34,16 @@ public class TileScript : MonoBehaviour
         
     }
 
+    public void Darken()
+    {
+        spriteRenderer.color = new Color(0.3f, 0.3f, 0.3f);
+    }
+
+    public void Lighten()
+    {
+        spriteRenderer.color = Color.white;
+    }
+
     public void Setup(Point gridPos, Vector3 worldPos, Transform parent)
     {
         IsEmpty = true;
@@ -48,24 +58,34 @@ public class TileScript : MonoBehaviour
         if (!EventSystem.current.IsPointerOverGameObject() &&
             GameManager.Instance.ClickedButton != null)
         {
-            if (IsEmpty)
+            if (!GameManager.Instance.IsNight)
             {
-                ColorTile(successColor);
-            }
-            else
-            {
-                ColorTile(failColor);
-            }
-            if (IsEmpty && Input.GetMouseButtonDown(0))
-            {
-                PlacePlant();
+                if (IsEmpty)
+                {
+                    ColorTile(successColor);
+                }
+                else
+                {
+                    ColorTile(failColor);
+                }
+                if (IsEmpty && Input.GetMouseButtonDown(0))
+                {
+                    PlacePlant();
+                }
             }
         }
     }
 
     private void OnMouseExit()
     {
-        ColorTile(Color.white);
+        if (!GameManager.Instance.IsNight)
+        {
+            ColorTile(Color.white);
+        }
+        else
+        {
+            ColorTile(new Color(0.3f, 0.3f, 0.3f));
+        }
     }
 
     private void PlacePlant()
