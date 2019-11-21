@@ -73,7 +73,7 @@ public class LevelManager : Singleton<LevelManager>
             }
         }
 
-    
+
         Vector3 maxTile = Tiles[new Point(gridWidth - 1, gridHeight - 1)].transform.position;
 
         cameraMovement.SetLimits(new Vector3(maxTile.x + TileSize/2, maxTile.y - TileSize/2));
@@ -119,7 +119,7 @@ public class LevelManager : Singleton<LevelManager>
         }
 
     }
-     
+
     public Vector3 pointToWorldSpace(Point p)
     {
         Vector3 topLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height));
@@ -129,7 +129,7 @@ public class LevelManager : Singleton<LevelManager>
     private void PlaceTile(int x, int y, Vector3 topLeft)
     {
         TileScript newTile = Instantiate(tilePrefabs[0]).GetComponent<TileScript>();
-        newTile.GetComponent<TileScript>().Setup(new Point(x, y), 
+        newTile.GetComponent<TileScript>().Setup(new Point(x, y),
                                                  new Vector3(topLeft.x + TileSize * x + TileSize / 2, topLeft.y - TileSize * y - TileSize / 2, 0.0f),
                                                  map);
     }
