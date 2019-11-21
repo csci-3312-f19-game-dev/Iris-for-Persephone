@@ -93,6 +93,7 @@ public class GameManager : Singleton<GameManager>
 
     public void TransitionToNight()
     {
+        DayNightSingleton.Instance.ToTransition();
         if (IsNight) return;
         IsNight = true;
         LevelManager.Instance.DarkenLevel();

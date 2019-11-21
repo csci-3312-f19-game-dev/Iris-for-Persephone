@@ -33,13 +33,15 @@ public class LevelChanger : MonoBehaviour
 
         if (!isDay && SceneManager.GetActiveScene().buildIndex == 1)
         {
+            LevelManager.Instance.DarkenLevel();
             Debug.Log("Activating darkness");
-            night.SetActive(true);
+           // night.SetActive(true);
 
         } else if (isDay && SceneManager.GetActiveScene().buildIndex == 1)
         {
+            LevelManager.Instance.LightenLevel();
             Debug.Log("Deactivating darkness");
-            night.SetActive(false);
+           // night.SetActive(false);
         }
 
     }
