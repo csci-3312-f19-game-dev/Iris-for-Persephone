@@ -15,6 +15,7 @@ public class EnemyMovement : MonoBehaviour
     public void Setup(Point start)
     {
         speed += 0.1f;
+        LevelManager.Instance.Tiles[loc].enemiesPresent += 1;
         GameManager.Instance.NumberOfEnemies += 1;
         loc = start;
         applyLocation();
@@ -24,7 +25,7 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Time.time - startTime > 1 / speed)
+        if(Time.time - startTime > (1 / speed))
         {
             Point goal = LevelManager.Instance.IrisLocation;
             if (goal.X == loc.X && goal.Y == loc.Y)
@@ -68,11 +69,18 @@ public class EnemyMovement : MonoBehaviour
                         GameObject.Destroy(child.gameObject);
                     }
                     LevelManager.Instance.Tiles[loc].IsEmpty = true;
+                    LevelManager.Instance.Tiles[oldLoc].enemiesPresent -= 1;
                     Destroy(this.gameObject);
+                }
+                else if(LevelManager.Instance.Tiles[loc].enemiesPresent > 0)
+                {
                     loc = oldLoc;
+                    applyLocation();
                 }
                 else
                 {
+                    LevelManager.Instance.Tiles[oldLoc].enemiesPresent -= 1;
+                    LevelManager.Instance.Tiles[loc].enemiesPresent += 1;
                     applyLocation();
                 }
 
@@ -92,6 +100,7 @@ public class EnemyMovement : MonoBehaviour
         GameManager.Instance.Seeds += 3;
         // this object was clicked - do something
         GameManager.Instance.NumberOfEnemies -= 1;
+        LevelManager.Instance.Tiles[loc].enemiesPresent -= 1;
         Destroy(this.gameObject);
     }
 }

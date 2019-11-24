@@ -8,6 +8,7 @@ public class TileScript : MonoBehaviour
     public Point GridPosition { get; private set; }
 
     public bool IsEmpty { get; set; }
+    public int enemiesPresent { get; set; }
 
     private Color32 failColor = new Color32(255, 150, 150, 255);
     private Color32 successColor = new Color32(120, 255, 100, 255);
@@ -25,6 +26,7 @@ public class TileScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        enemiesPresent = 0;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
