@@ -9,13 +9,12 @@ public class LevelChanger : MonoBehaviour
     public Animator animator;
     public Text text;
     public GameObject night;
+    public GameObject transitionPanel;
 
     private int levelToLoad;
     private bool isDay;
     private int num = 1;
     private int checkIsDay;
-
-
 
     // Start is called before the first frame update
     void Start()

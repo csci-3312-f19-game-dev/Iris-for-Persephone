@@ -12,6 +12,7 @@ public class DayNightSingleton : MonoBehaviour
     private bool isDay = true;
     private int checkIsDay;
 
+
     public static DayNightSingleton Instance { get { return _instance; } }
 
     private void Awake()
@@ -38,7 +39,6 @@ public class DayNightSingleton : MonoBehaviour
         {
             numDays++;
         }
-        SceneManager.LoadScene(0);
     }
 
     void OnDisable()

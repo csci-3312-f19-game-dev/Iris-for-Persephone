@@ -108,6 +108,7 @@ public class GameManager : Singleton<GameManager>
     {
         IsNight = false;
         LevelManager.Instance.LightenLevel();
+        DayNightSwitch.Instance.switchPanel();
     }
 
     private IEnumerator SpawnEnemies()
