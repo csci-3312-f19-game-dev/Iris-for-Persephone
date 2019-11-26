@@ -11,12 +11,14 @@ public class DayNightSwitch : Singleton<DayNightSwitch>
     public GameObject transitionPanel, gardenPanel;
 
     private bool isDay, isTransitionPanel;
-    private int num = 1;
+    private int num;
 
     // Start is called before the first frame update
     void Start()
     {
-        isDay = true;
+        isDay = false;
+        num = 1;
+        SetText();
 
         transitionPanel.SetActive(true);
         gardenPanel.SetActive(false);
@@ -66,8 +68,8 @@ public class DayNightSwitch : Singleton<DayNightSwitch>
         } else
         {
             text.text = ("Night " + num);
+            num ++;
         }
-        num ++;
     }
 
 
