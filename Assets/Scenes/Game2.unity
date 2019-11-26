@@ -604,6 +604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80427a1321505642a97af54962d2813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gardenPanel: {fileID: 1250689904}
   seedsText: {fileID: 494724644}
 --- !u!4 &326973343
 Transform:

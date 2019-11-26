@@ -8,7 +8,7 @@ public class DayNightSwitch : Singleton<DayNightSwitch>
 {
     public Text text;
     public Button toTransitionButton, toGameButton;
-    public GameObject transitionPanel, gardenPanel;
+    public GameObject transitionPanel;
 
     private bool isDay, isTransitionPanel;
     private int num;
@@ -21,12 +21,10 @@ public class DayNightSwitch : Singleton<DayNightSwitch>
         SetText();
 
         transitionPanel.SetActive(true);
-        gardenPanel.SetActive(false);
         isTransitionPanel = true;
 
         toTransitionButton.onClick.AddListener(()=>switchPanel());
         toGameButton.onClick.AddListener(()=>switchPanel());
-
     }
 
     // Update is called once per frame
@@ -43,13 +41,11 @@ public class DayNightSwitch : Singleton<DayNightSwitch>
         {
             SetText();
             transitionPanel.SetActive(true);
-            gardenPanel.SetActive(false);
         } else
         {
             if (isDay) { toTransitionButton.interactable = true; }
             else { toTransitionButton.interactable = false; }
             transitionPanel.SetActive(false);
-            gardenPanel.SetActive(true);
         }
     }
 
