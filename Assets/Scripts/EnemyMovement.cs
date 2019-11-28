@@ -62,14 +62,37 @@ public class EnemyMovement : MonoBehaviour
                 }
                 if (!LevelManager.Instance.Tiles[loc].IsEmpty)
                 {
-                    GameManager.Instance.NumberOfEnemies -= 1;
-                    foreach (Transform child in LevelManager.Instance.Tiles[loc].transform)
-                    {
-                        GameObject.Destroy(child.gameObject);
+                    foreach (Transform child in LevelManager.Instance.Tiles[loc].transform){
+                       
+                        if(child.gameObject.name == "Bush" || child.gameObject.name == "Pumpkin")
+                        {
+                            GameManager.Instance.NumberOfEnemies -= 1;
+                            Destroy(this.gameObject);
+                            child.gameObject.GetComponent<PlantTile>().health -= 1;
+                            if(child.gameObject.GetComponent<PlantTile>().health <= 0){
+                                GameObject.Destroy(child.gameObject);
+                                LevelManager.Instance.Tiles[loc].IsEmpty = true;
+                            }
+                            loc = oldLoc;
+                        }
+                        else
+                        {
+                            GameObject.Destroy(child.gameObject);
+                            LevelManager.Instance.Tiles[loc].IsEmpty = true;
+                        }
+
                     }
-                    LevelManager.Instance.Tiles[loc].IsEmpty = true;
-                    Destroy(this.gameObject);
-                    loc = oldLoc;
+                    
+                    
+                    
+                    //GameManager.Instance.NumberOfEnemies -= 1;
+                    //foreach (Transform child in LevelManager.Instance.Tiles[loc].transform)
+                    //{
+                    //    GameObject.Destroy(child.gameObject);
+                    //}
+                    //LevelManager.Instance.Tiles[loc].IsEmpty = true;
+                    //Destroy(this.gameObject);
+                    //loc = oldLoc;
                 }
                 else
                 {

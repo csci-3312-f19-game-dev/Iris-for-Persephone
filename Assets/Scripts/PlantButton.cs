@@ -14,9 +14,7 @@ public class PlantButton : MonoBehaviour
     public int Price { get => price; }
     [SerializeField]
     private Text priceText;
-    //this is just a list of variables for reference in enemy combat and ui, instantiated in Start()
-    private PlantAbility plant;
-    
+   
     
     //get name of prefab object to tag it w/ its stats
     public string Name
@@ -28,15 +26,11 @@ public class PlantButton : MonoBehaviour
     }
     
 
+
     private void Start()
     {
-        plant = new PlantAbility(Name); //takes prefab to determine which plant abilities to use
-        //can now refer to plant.health, plant.cost etc
-        priceText.text = plant.cost + "$";
-        //plant stat values go down here
-        //
-        //
-        //
+        priceText.text = Price + "$";
+        
     }
 
     public GameObject PlantPrefab

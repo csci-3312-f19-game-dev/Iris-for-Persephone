@@ -460,6 +460,7 @@ MonoBehaviour:
   sprite: {fileID: 21300332, guid: 2399db5c131fc144d82e15172a5891ab, type: 3}
   price: 5
   priceText: {fileID: 41172525}
+  health: 0
 --- !u!1 &326973341
 GameObject:
   m_ObjectHideFlags: 0
@@ -864,6 +865,7 @@ MonoBehaviour:
   sprite: {fileID: 21300082, guid: 2399db5c131fc144d82e15172a5891ab, type: 3}
   price: 8
   priceText: {fileID: 802110917}
+  health: 0
 --- !u!1 &781559434
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,6 +1424,7 @@ MonoBehaviour:
   sprite: {fileID: 21300110, guid: 2399db5c131fc144d82e15172a5891ab, type: 3}
   price: 1
   priceText: {fileID: 1721578678}
+  health: 0
 --- !u!1 &1134945897
 GameObject:
   m_ObjectHideFlags: 0
@@ -1937,6 +1940,7 @@ MonoBehaviour:
   sprite: {fileID: 21300316, guid: 2399db5c131fc144d82e15172a5891ab, type: 3}
   price: 2
   priceText: {fileID: 781559438}
+  health: 0
 --- !u!1 &1870711112
 GameObject:
   m_ObjectHideFlags: 0

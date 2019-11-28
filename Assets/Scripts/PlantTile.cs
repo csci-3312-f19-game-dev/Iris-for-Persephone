@@ -1,56 +1,54 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-class PlantAbility
+public class PlantTile : MonoBehaviour
 {
-      
-   public int health;
-   
-   public int growTime; //just in case this is ever needed
-   
-   public string description; //for tooltips
+    public int health;
+    public string name;
+    public int atk = 0; //attack value for plant. 0 unless plant kills stuff on hit, b/c 1hp enemies
+    public int growTime;
+    public string description;
 
-   public double value; //if selling is ever implemented....
+    // Start is called before the first frame update
+    void Start()
+    {
+        name = this.name;
+        getStats(name);
+    }
 
-   public int cost;
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 
-
-   public PlantAbility(string name)
-   {
-
-                
-       switch (name)
+    void getStats(string name){
+         switch (name)
        {
            case "Sunflower":
                 health = 1;
                 growTime = 1;
                 description = "A lovely, fast-growing flower, but they aren't very good defense!";
-                value = 1.5;
-                cost = 1;
                 break;
            case "Bush":
                 //kills enemies on contact?
                 health = 10;
                 growTime = 3;
                 description = "A big, spiky briar bush. Nothing gets past it.";
-                value = 0.0;
-                cost = 8;
+                atk = 10; //just needs to be >1
                 break;
            case "Pumpkin":
                 health = 6;
                 growTime = 2;
                 description = "A big, round plant that gets in the way of stuff. It also recharges mana!";
-                value = 7;
-                cost = 5;
                 break;
            case "Carrot":
                 //if near carrot, ai are prioritized to go after the carrot?
                 health = 3;
                 growTime = 1;
                 description = "A tasty little treat most critters can't refuse.";
-                value = 3;
-                cost = 2;
                 break;
            default:
                 name = "";
@@ -58,16 +56,7 @@ class PlantAbility
                 growTime = 1;
                 break;
        }
+    }
 
 
-   }
 }
-
-//id 0 - dandelion/sunflower
-// 1hp, 1d grow time, no abilities
-
-//id 1 - bush
-//10 hp, kills enemies on contact? 2 day grow time
-
-//id 2
-//

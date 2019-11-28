@@ -55,6 +55,11 @@ public class TileScript : MonoBehaviour
 
     private void OnMouseOver()
     {
+        
+        //tooltips go here
+       
+        
+        
         if (!EventSystem.current.IsPointerOverGameObject() &&
             GameManager.Instance.ClickedButton != null)
         {
@@ -93,6 +98,8 @@ public class TileScript : MonoBehaviour
         GameObject plant = Instantiate(GameManager.Instance.ClickedButton.PlantPrefab, transform.position, Quaternion.identity);
         plant.GetComponent<SpriteRenderer>().sortingOrder = GridPosition.Y;
         plant.transform.SetParent(transform);
+        plant.name = GameManager.Instance.ClickedButton.Name;
+        plant.AddComponent<PlantTile>();
         IsEmpty = false;
         ColorTile(Color.white);
         GameManager.Instance.BuyPlant();
