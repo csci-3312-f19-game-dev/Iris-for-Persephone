@@ -25,8 +25,6 @@ public class PlantButton : MonoBehaviour
         }
     }
     
-
-
     private void Start()
     {
         priceText.text = Price + "$";
