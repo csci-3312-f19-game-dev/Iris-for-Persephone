@@ -64,23 +64,21 @@ public class EnemyMovement : MonoBehaviour
                 {
                     foreach (Transform child in LevelManager.Instance.Tiles[loc].transform){
                        
-                        if(child.gameObject.name == "Bush" || child.gameObject.name == "Pumpkin")
+                        child.gameObject.GetComponent<PlantTile>().Hit();
+
+                        if(child.gameObject.GetComponent<PlantTile>().Atk() > 0)
                         {
                             GameManager.Instance.NumberOfEnemies -= 1;
                             Destroy(this.gameObject);
-                            child.gameObject.GetComponent<PlantTile>().health -= 1;
-                            if(child.gameObject.GetComponent<PlantTile>().health <= 0){
-                                GameObject.Destroy(child.gameObject);
-                                LevelManager.Instance.Tiles[loc].IsEmpty = true;
-                            }
                             loc = oldLoc;
                         }
-                        else
-                        {
-                            GameObject.Destroy(child.gameObject);
-                            LevelManager.Instance.Tiles[loc].IsEmpty = true;
-                        }
 
+                        if(child.gameObject.GetComponent<PlantTile>().Health() < 1){
+                                GameObject.Destroy(child.gameObject);
+                                LevelManager.Instance.Tiles[loc].IsEmpty = true;
+                        }
+                        
+                        
                     }
                     
                     

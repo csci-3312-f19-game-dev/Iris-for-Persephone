@@ -6,16 +6,26 @@ using UnityEngine.EventSystems;
 public class PlantTile : MonoBehaviour
 {
     public int health;
-    public string name;
+    public string _name;
     public int atk = 0; //attack value for plant. 0 unless plant kills stuff on hit, b/c 1hp enemies
     public int growTime;
     public string description;
 
+    public void Hit(){
+         health = health - 1;
+    }
+
+    public int Atk(){
+         return atk;
+    }
+    public int Health(){
+         return health;
+    }
     // Start is called before the first frame update
     void Start()
     {
-        name = this.name;
-        getStats(name);
+        _name = gameObject.name;
+        getStats(_name);
     }
 
     // Update is called once per frame
