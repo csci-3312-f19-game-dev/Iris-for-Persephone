@@ -63,11 +63,32 @@ public class EnemyMovement : MonoBehaviour
                 }
                 if (!LevelManager.Instance.Tiles[loc].IsEmpty)
                 {
-                    GameManager.Instance.NumberOfEnemies -= 1;
-                    foreach (Transform child in LevelManager.Instance.Tiles[loc].transform)
-                    {
-                        GameObject.Destroy(child.gameObject);
-                    }
+                    foreach (Transform child in LevelManager.Instance.Tiles[loc].transform){
+                       
+                        child.gameObject.GetComponent<PlantTile>().Hit();
+
+                        if(child.gameObject.GetComponent<PlantTile>().Atk() > 0)
+                        {
+                            GameManager.Instance.NumberOfEnemies -= 1;
+                            Destroy(this.gameObject);
+                            loc = oldLoc;
+                        }
+
+                        if(child.gameObject.GetComponent<PlantTile>().Health() < 1){
+                                GameObject.Destroy(child.gameObject);
+                                LevelManager.Instance.Tiles[loc].IsEmpty = true;
+                        }
+                        
+                        
+                    }      
+                    //GameManager.Instance.NumberOfEnemies -= 1;
+                    //foreach (Transform child in LevelManager.Instance.Tiles[loc].transform)
+                    //{
+                    //    GameObject.Destroy(child.gameObject);
+                    //}
+                    //LevelManager.Instance.Tiles[loc].IsEmpty = true;
+                    //Destroy(this.gameObject);
+                    //loc = oldLoc;
                     LevelManager.Instance.Tiles[loc].IsEmpty = true;
                     LevelManager.Instance.Tiles[oldLoc].enemiesPresent -= 1;
                     Destroy(this.gameObject);

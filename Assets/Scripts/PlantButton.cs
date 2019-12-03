@@ -14,10 +14,21 @@ public class PlantButton : MonoBehaviour
     public int Price { get => price; }
     [SerializeField]
     private Text priceText;
-
+   
+    
+    //get name of prefab object to tag it w/ its stats
+    public string Name
+    {
+        get
+        {
+            return plantPrefab.name;
+        }
+    }
+    
     private void Start()
     {
         priceText.text = Price + "$";
+        
     }
 
     public GameObject PlantPrefab
