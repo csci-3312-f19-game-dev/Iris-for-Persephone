@@ -14,6 +14,9 @@ public class GameManager : Singleton<GameManager>
     private bool isNight = false;
 
     [SerializeField]
+    GameObject gardenPanel;
+
+    [SerializeField]
     private Text seedsText;
     private int numberOfEnemies;
     public int NumberOfEnemies
@@ -93,6 +96,8 @@ public class GameManager : Singleton<GameManager>
 
     public void TransitionToNight()
     {
+        gardenPanel.SetActive(false);
+        DayNightSingleton.Instance.ToTransition();
         if (IsNight) return;
         IsNight = true;
         LevelManager.Instance.DarkenLevel();
@@ -105,8 +110,10 @@ public class GameManager : Singleton<GameManager>
 
     public void TransitionToDay()
     {
+        gardenPanel.SetActive(true);
         IsNight = false;
         LevelManager.Instance.LightenLevel();
+        DayNightSwitch.Instance.switchPanel();
     }
 
     private IEnumerator SpawnEnemies()
