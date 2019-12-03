@@ -11,6 +11,9 @@ public class EnemyMovement : MonoBehaviour
     private float startTime;
     private Point loc;
 
+    [SerializeField]
+    private GameObject explosion;
+
     // Start is called before the first frame update
     public void Setup(Point start)
     {
@@ -118,6 +121,8 @@ public class EnemyMovement : MonoBehaviour
 
     void OnMouseDown()
     {
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Instantiate(explosion, new Vector3(mousePos.x, mousePos.y, 0.0f), Quaternion.identity);
         GameManager.Instance.Seeds += 3;
         // this object was clicked - do something
         GameManager.Instance.NumberOfEnemies -= 1;

@@ -113,7 +113,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff9bcf21e006c640a9fde496434ee18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  explosion: {fileID: 9020949910852017929, guid: d1d81b309231b22449e1eafd98d83bc7,
+    type: 3}
 --- !u!61 &61265812041199514
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -138,5 +139,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.35555556, y: 0.46222222}
+  m_Size: {x: 2.5, y: 2.5}
   m_EdgeRadius: 0
