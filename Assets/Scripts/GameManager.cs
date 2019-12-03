@@ -59,7 +59,7 @@ public class GameManager : Singleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        Seeds = 5;
+        Seeds = 500;
     }
 
     // Update is called once per frame

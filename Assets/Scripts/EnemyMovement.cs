@@ -70,17 +70,21 @@ public class EnemyMovement : MonoBehaviour
                        
                         child.gameObject.GetComponent<PlantTile>().Hit();
 
-                        if(child.gameObject.GetComponent<PlantTile>().Atk() > 0)
-                        {
-                            GameManager.Instance.NumberOfEnemies -= 1;
-                            Destroy(this.gameObject);
-                            loc = oldLoc;
-                        }
 
                         if(child.gameObject.GetComponent<PlantTile>().Health() < 1){
                                 GameObject.Destroy(child.gameObject);
                                 LevelManager.Instance.Tiles[loc].IsEmpty = true;
+                                loc = oldLoc;
+                                applyLocation();
                         }
+
+                        if(child.gameObject.GetComponent<PlantTile>().Atk() > 0)
+                        {
+                            GameManager.Instance.NumberOfEnemies -= 1;
+                            LevelManager.Instance.Tiles[oldLoc].enemiesPresent -= 1;
+                            Destroy(this.gameObject);
+                        }
+
                         
                         
                     }      
@@ -92,9 +96,8 @@ public class EnemyMovement : MonoBehaviour
                     //LevelManager.Instance.Tiles[loc].IsEmpty = true;
                     //Destroy(this.gameObject);
                     //loc = oldLoc;
-                    LevelManager.Instance.Tiles[loc].IsEmpty = true;
-                    LevelManager.Instance.Tiles[oldLoc].enemiesPresent -= 1;
-                    Destroy(this.gameObject);
+                    
+
                 }
                 else if(LevelManager.Instance.Tiles[loc].enemiesPresent > 0)
                 {
