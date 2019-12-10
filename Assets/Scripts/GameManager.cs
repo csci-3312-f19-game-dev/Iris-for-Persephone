@@ -96,6 +96,8 @@ public class GameManager : Singleton<GameManager>
 
     public void TransitionToNight()
     {
+        //DayNightSwitch.Instance.ActivateTransitionIn();
+        Debug.Log("this ran.");
         gardenPanel.SetActive(false);
         DayNightSingleton.Instance.ToTransition();
         if (IsNight) return;
@@ -110,10 +112,11 @@ public class GameManager : Singleton<GameManager>
 
     public void TransitionToDay()
     {
+        //DayNightSwitch.Instance.ActivateTransitionIn();
         gardenPanel.SetActive(true);
         IsNight = false;
-        LevelManager.Instance.LightenLevel();
         DayNightSwitch.Instance.switchPanel();
+        LevelManager.Instance.LightenLevel();
     }
 
     private IEnumerator SpawnEnemies()

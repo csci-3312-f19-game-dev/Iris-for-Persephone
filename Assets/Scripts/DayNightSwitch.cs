@@ -9,6 +9,10 @@ public class DayNightSwitch : Singleton<DayNightSwitch>
     public Text text;
     public Button toTransitionButton, toGameButton;
     public GameObject transitionPanel;
+    public AudioSource audio;
+    public AudioClip dayMusic, nightMusic;
+    public Animator anim;
+    public Image img;
 
     private bool isDay, isTransitionPanel;
     private int num;
@@ -16,15 +20,22 @@ public class DayNightSwitch : Singleton<DayNightSwitch>
     // Start is called before the first frame update
     void Start()
     {
+        audio.clip = dayMusic;
+
         isDay = false;
         num = 1;
         SetText();
 
-        transitionPanel.SetActive(true);
+        ActivateTransitionIn();
+        //transitionPanel.SetActive(true);
         isTransitionPanel = true;
 
         toTransitionButton.onClick.AddListener(()=>switchPanel());
         toGameButton.onClick.AddListener(()=>switchPanel());
+
+        //StartCoroutine(ActivateTransitionIn());
+        //StartCoroutine(ActivateTransitionOut());
+
     }
 
     // Update is called once per frame
@@ -37,21 +48,49 @@ public class DayNightSwitch : Singleton<DayNightSwitch>
     {
         isTransitionPanel = !isTransitionPanel;
 
-        if (isTransitionPanel)
-        {
+        if (isTransitionPanel) {
+            ActivateTransitionIn();
             SetText();
-            transitionPanel.SetActive(true);
-        } else
-        {
-            if (isDay) { toTransitionButton.interactable = true; }
-            else { toTransitionButton.interactable = false; }
-            transitionPanel.SetActive(false);
+        }
+        else {
+
+            if (isDay) {
+                ActivateTransitionOut();
+                audio.clip = dayMusic;
+                audio.Play();
+                toTransitionButton.gameObject.SetActive(true);
+            } else {
+                ActivateTransitionOut();
+                audio.clip = nightMusic;
+                audio.Play();
+                toTransitionButton.gameObject.SetActive(false);
+            }
+            //ActivateTransitionOut();
+            //transitionPanel.SetActive(false);
         }
     }
 
-    public void OnFadeComplete ()
-    {
+    public void ActivateTransitionIn() {
+        anim.SetBool("FadeOut", false);
+        anim.SetBool("FadeIn", true);
+        //yield return new WaitForSeconds(2);
+    }
+    public void ActivateTransitionOut() {
+        anim.SetBool("FadeIn", false);
+        anim.SetBool("FadeOut", true);
+        //yield return new WaitForSeconds(2);
+        //transitionPanel.SetActive(false);
 
+    }
+
+    public void KillThePanel() {
+        transitionPanel.SetActive(false);
+        //if (!isDay) { GameManager.Instance.TransitionToNight(); }
+    }
+
+    public void TrueRessurection() {
+        //GameManager.Instance.TransitionToDay();
+        transitionPanel.SetActive(true);
     }
 
     void SetText()
@@ -67,6 +106,5 @@ public class DayNightSwitch : Singleton<DayNightSwitch>
             num ++;
         }
     }
-
 
 }

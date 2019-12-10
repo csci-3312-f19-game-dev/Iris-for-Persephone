@@ -9,14 +9,10 @@ public class CreditSwitcher : MonoBehaviour
 {
 
     public Button button;
-    public GameObject mainMenu, creditsScreen;
 
     // Start is called before the first frame update
     void Start()
     {
-        mainMenu.SetActive(true);
-        creditsScreen.SetActive(false);
-        button.onClick.AddListener(()=>Switcharoo());
     }
 
     // Update is called once per frame
@@ -27,9 +23,5 @@ public class CreditSwitcher : MonoBehaviour
 
     void Switcharoo()
     {
-
-        mainMenu.SetActive(false);
-        creditsScreen.SetActive(true);
-
     }
 }
