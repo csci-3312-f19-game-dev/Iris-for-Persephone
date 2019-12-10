@@ -94,15 +94,15 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+
     public void TransitionToNight()
     {
         //DayNightSwitch.Instance.ActivateTransitionIn();
-        Debug.Log("this ran.");
         gardenPanel.SetActive(false);
         DayNightSingleton.Instance.ToTransition();
         if (IsNight) return;
         IsNight = true;
-        LevelManager.Instance.DarkenLevel();
+        //LevelManager.Instance.DarkenLevel();
         for (int i = 0; i < enemyDiffuculty; i++)
         {
             StartCoroutine(SpawnEnemies());
