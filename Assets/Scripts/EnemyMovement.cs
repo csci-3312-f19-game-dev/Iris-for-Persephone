@@ -7,6 +7,9 @@ public class EnemyMovement : MonoBehaviour
 {
     static public float speed = 1.0f;
 
+    public AudioSource audio;
+    public AudioClip hit;
+
     // Time when the movement started.
     private float startTime;
     private Point loc;
@@ -23,6 +26,8 @@ public class EnemyMovement : MonoBehaviour
         loc = start;
         applyLocation();
         startTime = Time.time;
+    }
+    void Start() {
     }
 
     // Update is called once per frame
@@ -67,7 +72,7 @@ public class EnemyMovement : MonoBehaviour
                 if (!LevelManager.Instance.Tiles[loc].IsEmpty)
                 {
                     foreach (Transform child in LevelManager.Instance.Tiles[loc].transform){
-                       
+
                         child.gameObject.GetComponent<PlantTile>().Hit();
 
 
@@ -85,9 +90,9 @@ public class EnemyMovement : MonoBehaviour
                             Destroy(this.gameObject);
                         }
 
-                        
-                        
-                    }      
+
+
+                    }
                     //GameManager.Instance.NumberOfEnemies -= 1;
                     //foreach (Transform child in LevelManager.Instance.Tiles[loc].transform)
                     //{
@@ -96,7 +101,7 @@ public class EnemyMovement : MonoBehaviour
                     //LevelManager.Instance.Tiles[loc].IsEmpty = true;
                     //Destroy(this.gameObject);
                     //loc = oldLoc;
-                    
+
 
                 }
                 else if(LevelManager.Instance.Tiles[loc].enemiesPresent > 0)
@@ -124,6 +129,7 @@ public class EnemyMovement : MonoBehaviour
 
     void OnMouseDown()
     {
+        SoundHandler.Instance.HitSound();
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Instantiate(explosion, new Vector3(mousePos.x, mousePos.y, 0.0f), Quaternion.identity);
         GameManager.Instance.Seeds += 3;
