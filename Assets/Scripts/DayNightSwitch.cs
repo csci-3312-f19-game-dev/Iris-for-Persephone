@@ -9,6 +9,8 @@ public class DayNightSwitch : Singleton<DayNightSwitch>
     public Text text;
     public Button toTransitionButton, toGameButton;
     public GameObject transitionPanel;
+    public AudioSource audio;
+    public AudioClip dayMusic, nightMusic;
 
     private bool isDay, isTransitionPanel;
     private int num;
@@ -16,6 +18,8 @@ public class DayNightSwitch : Singleton<DayNightSwitch>
     // Start is called before the first frame update
     void Start()
     {
+        audio.clip = dayMusic;
+
         isDay = false;
         num = 1;
         SetText();
@@ -43,8 +47,16 @@ public class DayNightSwitch : Singleton<DayNightSwitch>
             transitionPanel.SetActive(true);
         } else
         {
-            if (isDay) { toTransitionButton.interactable = true; }
-            else { toTransitionButton.interactable = false; }
+            if (isDay) {
+                audio.clip = dayMusic;
+                audio.Play();
+                toTransitionButton.interactable = true;
+            }
+            else {
+                audio.clip = nightMusic;
+                audio.Play();
+                toTransitionButton.interactable = false;
+            }
             transitionPanel.SetActive(false);
         }
     }
