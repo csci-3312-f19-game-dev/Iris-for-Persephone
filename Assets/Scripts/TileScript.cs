@@ -14,6 +14,7 @@ public class TileScript : MonoBehaviour
     private Color32 successColor = new Color32(120, 255, 100, 255);
 
     private SpriteRenderer spriteRenderer;
+    private bool isDarkened;
 
     public Vector2 WorldPos
     {
@@ -33,16 +34,18 @@ public class TileScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void Darken()
     {
+        isDarkened = true;
         spriteRenderer.color = new Color(0.3f, 0.3f, 0.3f);
     }
 
     public void Lighten()
     {
+        isDarkened = false;
         spriteRenderer.color = Color.white;
     }
 
@@ -57,11 +60,11 @@ public class TileScript : MonoBehaviour
 
     private void OnMouseOver()
     {
-        
+
         //tooltips go here
-       
-        
-        
+
+
+
         if (!EventSystem.current.IsPointerOverGameObject() &&
             GameManager.Instance.ClickedButton != null)
         {
@@ -85,7 +88,7 @@ public class TileScript : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (!GameManager.Instance.IsNight)
+        if (!GameManager.Instance.IsNight && !isDarkened)
         {
             ColorTile(Color.white);
         }

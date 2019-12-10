@@ -14,7 +14,8 @@ public class DayNightSwitch : Singleton<DayNightSwitch>
     public Animator anim;
     public Image img;
 
-    private bool isDay, isTransitionPanel;
+    public bool isDay;
+    private bool isTransitionPanel;
     private int num;
 
     // Start is called before the first frame update
@@ -27,14 +28,10 @@ public class DayNightSwitch : Singleton<DayNightSwitch>
         SetText();
 
         ActivateTransitionIn();
-        //transitionPanel.SetActive(true);
         isTransitionPanel = true;
 
         toTransitionButton.onClick.AddListener(()=>switchPanel());
         toGameButton.onClick.AddListener(()=>switchPanel());
-
-        //StartCoroutine(ActivateTransitionIn());
-        //StartCoroutine(ActivateTransitionOut());
 
     }
 
@@ -51,6 +48,7 @@ public class DayNightSwitch : Singleton<DayNightSwitch>
         if (isTransitionPanel) {
             ActivateTransitionIn();
             SetText();
+            SetDayNight();
         }
         else {
 
@@ -71,21 +69,28 @@ public class DayNightSwitch : Singleton<DayNightSwitch>
     }
 
     public void ActivateTransitionIn() {
-        anim.SetBool("FadeOut", false);
-        anim.SetBool("FadeIn", true);
+        //anim.SetBool("FadeOut", false);
+        //anim.SetBool("FadeIn", true);
+        anim.Play("Fade_In", 0, 0f);
         //yield return new WaitForSeconds(2);
     }
     public void ActivateTransitionOut() {
-        anim.SetBool("FadeIn", false);
-        anim.SetBool("FadeOut", true);
+        //anim.SetBool("FadeIn", false);
+        //anim.SetBool("FadeOut", true);
+        anim.Play("Fade_Out", 0, 0f);
         //yield return new WaitForSeconds(2);
         //transitionPanel.SetActive(false);
 
     }
 
+    public void SetDayNight() {
+        if (isDay) { LevelManager.Instance.LightenLevel(); }
+        else { LevelManager.Instance.DarkenLevel(); }
+    }
+
     public void KillThePanel() {
+        if (!isDay) { GameManager.Instance.TransitionToNight(); }
         transitionPanel.SetActive(false);
-        //if (!isDay) { GameManager.Instance.TransitionToNight(); }
     }
 
     public void TrueRessurection() {
@@ -97,11 +102,8 @@ public class DayNightSwitch : Singleton<DayNightSwitch>
     {
         isDay = !isDay;
 
-        if (isDay)
-        {
-            text.text = ("Day " + num);
-        } else
-        {
+        if (isDay) { text.text = ("Day " + num); }
+        else {
             text.text = ("Night " + num);
             num ++;
         }
