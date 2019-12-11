@@ -13,7 +13,7 @@ public class ScoreHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int highScore = 10;
+        int highScore = 0;
         scoreText.text = "High score:" + highScore;
 
     }
